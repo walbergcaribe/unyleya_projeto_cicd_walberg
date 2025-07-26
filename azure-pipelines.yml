@@ -24,11 +24,16 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: 'mkdir c:\a\1\MobEAD' 
+    script: |
+      IF EXIST "C:\a\1\MobEAD" (
+          RMDIR /S /Q "C:\a\1\MobEAD"
+      )
+      MKDIR "C:\a\1\MobEAD"
     #workingDirectory: # Optional
     #failOnStderr: false # Optional
 
 - task: NuGetToolInstaller@1
+
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
