@@ -73,5 +73,25 @@ steps:
   inputs:
        artifactName: # 'drop'
 
+# Build da imagem Docker
+- task: Docker@2
+  displayName: Build Docker image
+  inputs:
+    containerRegistry: 'docker-wcbl'                # Nome da conexão criada
+    repository: 'walbergcaribe/mobead'           # Nome da imagem no Docker Hub
+    command: 'build'
+    Dockerfile: '**/Dockerfile'
+    tags: |
+      latest
+
+# Push da imagem para o Docker Hub
+- task: Docker@2
+  displayName: Push Docker image
+  inputs:
+    containerRegistry: 'docker-wcbl'
+    repository: 'walbergcaribe/mobead'
+    command: 'push'
+    tags: |
+      latest
  
 
