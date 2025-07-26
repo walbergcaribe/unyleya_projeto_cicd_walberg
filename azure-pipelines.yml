@@ -25,10 +25,10 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      IF EXIST "C:\a\1\MobEAD" (
-          RMDIR /S /Q "C:\a\1\MobEAD"
+      IF EXIST "C:\az-agents\vsts-agent-win-x64-4.258.1\_work\1\MobEAD" (
+          RMDIR /S /Q "C:\az-agents\vsts-agent-win-x64-4.258.1\_work\1\MobEAD"
       )
-      MKDIR "C:\a\1\MobEAD"
+      MKDIR "C:\az-agents\vsts-agent-win-x64-4.258.1\_work\1\MobEAD"
     #workingDirectory: # Optional
     #failOnStderr: false # Optional
 
