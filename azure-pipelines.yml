@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  name: wcbl-local-agent
+  name: wcbl-local-agent-dnet
 
 # Command line
 # Run a command line script using Bash on Linux and macOS and cmd.exe on Windows
