@@ -26,19 +26,20 @@ steps:
 # Run a command line script using Bash on Linux and macOS and cmd.exe on Windows
 
 - task: PowerShell@2
-  displayName: 'Executar script com ConvertTo-SecureString'
+  displayName: 'Reset TypeData antes de importar módulo'
   inputs:
     targetType: 'inline'
-    pwsh: false   # <-- FORÇA USAR O WINDOWS POWERSHELL CLÁSSICO
+    pwsh: false
     script: |
-      try {
-        Import-Module Microsoft.PowerShell.Security -ErrorAction Stop
-        $SecurePassword = ConvertTo-SecureString "MinhaSenha123" -AsPlainText -Force
-        Write-Host "Senha criptografada com sucesso"
-      } catch {
-        Write-Error "Erro ao importar módulo ou converter senha: $_"
-        throw
-      }
+      # Remove definições de tipo prévias para evitar conflitos
+      Remove-TypeData -TypeName 'System.Security.AccessControl.ObjectSecurity' -ErrorAction SilentlyContinue
+
+      # Agora pode importar o módulo sem erro
+      Import-Module Microsoft.PowerShell.Security -ErrorAction Stop
+
+      # Exemplo: criptografar senha
+      $SecurePassword = ConvertTo-SecureString "MinhaSenha123" -AsPlainText -Force
+      Write-Host "Senha criptografada com sucesso."
 
 - task: CmdLine@2
   inputs:
