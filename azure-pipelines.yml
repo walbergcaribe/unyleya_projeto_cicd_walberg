@@ -25,6 +25,21 @@ steps:
 # Command line
 # Run a command line script using Bash on Linux and macOS and cmd.exe on Windows
 
+- task: PowerShell@2
+  displayName: 'Executar script com ConvertTo-SecureString'
+  inputs:
+    targetType: 'inline'
+    pwsh: false   # <-- FORÇA USAR O WINDOWS POWERSHELL CLÁSSICO
+    script: |
+      try {
+        Import-Module Microsoft.PowerShell.Security -ErrorAction Stop
+        $SecurePassword = ConvertTo-SecureString "MinhaSenha123" -AsPlainText -Force
+        Write-Host "Senha criptografada com sucesso"
+      } catch {
+        Write-Error "Erro ao importar módulo ou converter senha: $_"
+        throw
+      }
+
 - task: CmdLine@2
   inputs:
     script: 'mkdir d:\a\1\MobEAD' 
