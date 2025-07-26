@@ -12,28 +12,12 @@ pool:
 # Command line
 # Run a command line script using Bash on Linux and macOS and cmd.exe on Windows
 
-
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
-
-
 steps:
-
-# ✅ Diagnóstico: ver versão do PowerShell em execução
-- powershell: |
-    Write-Host "Versão do PowerShell:"
-    $PSVersionTable
-  displayName: 'Verificar versão do PowerShell'
-
-# ✅ Corrigido: Evitar conflito de TypeData e usar PowerShell clássico
-- powershell: |
-    Import-Module Microsoft.PowerShell.Security -ErrorAction Stop
-    $SecurePassword = ConvertTo-SecureString "MinhaSenha123" -AsPlainText -Force
-    Write-Host "Senha criptografada com sucesso."
-  displayName: 'Criptografar senha com PowerShell'
 
 # Command line
 # Run a command line script using Bash on Linux and macOS and cmd.exe on Windows
